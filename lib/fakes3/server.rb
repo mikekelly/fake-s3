@@ -47,9 +47,9 @@ module FakeS3
     def initialize(server,store,hostname)
       super(server)
       @store = store
-      @hostname = hostname
+      @hostnames = Array(hostname)
       @port = server.config[:Port]
-      @root_hostnames = [hostname,'localhost','s3.amazonaws.com','s3.localhost']
+      @root_hostnames = ['localhost','s3.amazonaws.com','s3.localhost'] + hostnames
     end
 
     def validate_request(request)
