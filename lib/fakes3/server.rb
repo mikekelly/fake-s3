@@ -445,17 +445,9 @@ module FakeS3
 
     # This method takes a webrick request and generates a normalized FakeS3 request
     def normalize_request(webrick_req)
-      host_header= webrick_req["Host"]
-      host = host_header.split(':')[0]
-
       s_req = Request.new
       s_req.path = webrick_req.path
       s_req.is_path_style = true
-
-      if !@root_hostnames.include?(host)
-        s_req.bucket = host.split(".")[0]
-        s_req.is_path_style = false
-      end
 
       s_req.http_verb = webrick_req.request_method
 
